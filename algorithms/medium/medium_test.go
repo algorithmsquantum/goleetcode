@@ -29,3 +29,31 @@ func Test_addTwoNumbers(t *testing.T) {
 		})
 	}
 }
+
+func Test_lengthOfLongestSubstring(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{"abcabcbb 's longest substring is abc", args{"abcabcbb"}, 3},
+		{"bbbbb 's longest substring is b", args{"bbbbb"}, 1},
+		{"pwwkew 's longest substring is wke", args{"pwwkew"}, 3},
+		{"abcdefg 's longest substring is abcdefg", args{"abcdefg"}, 7},
+		{"c 's longest substring is c", args{"c"}, 1},
+		{"abba 's longest substring is ab", args{"abba"}, 2},
+		{"dvdf 's longest substring is vdf", args{"dvdf"}, 3},
+		{"anviaj 's longest substring is nviaj", args{"anviaj"}, 5},
+		{"\"\" 's longest substring is \"\"", args{""}, 0},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := lengthOfLongestSubstring(tt.args.s); got != tt.want {
+				t.Errorf("lengthOfLongestSubstring() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

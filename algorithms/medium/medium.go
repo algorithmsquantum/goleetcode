@@ -36,3 +36,28 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	return dummyHead.Next
 }
+
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
+func lengthOfLongestSubstring(s string) int {
+	sr := []rune(s)
+	n := len(sr)
+	m := make(map[rune]bool, n)
+	var maxLen, i, j int
+
+	for i < n && j < n {
+		if _, ok := m[sr[j]]; !ok {
+			m[sr[j]] = true
+			j++
+			subLen := j - i
+			if subLen > maxLen {
+				maxLen = subLen
+			}
+		} else {
+			delete(m, sr[i])
+			i++
+		}
+	}
+
+	return maxLen
+}
