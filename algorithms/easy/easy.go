@@ -1,5 +1,9 @@
 package easy
 
+import (
+	"math"
+)
+
 // https://leetcode.com/problems/two-sum/description/
 // Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -19,4 +23,67 @@ func twoSum(nums []int, target int) []int {
 	}
 
 	return nil
+}
+
+// https://leetcode.com/problems/reverse-integer/description/
+// Given a 32-bit signed integer, reverse digits of an integer.
+// Example 1:
+// Input: 123
+// Output:  321
+// Example 2:
+// Input: -123
+// Output: -321
+// Example 3:
+// Input: 120
+// Output: 21
+// Note:
+// Assume we are dealing with an environment which could only hold integers within the 32-bit signed integer range.
+// For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+func reverse0(x int) int {
+	posi := true
+	if x < 0 {
+		posi = false
+		x = -x
+	}
+
+	a := make([]int, 0)
+	for {
+		rem := x % 10
+		a = append(a, rem)
+		if cons := x / 10; cons == 0 {
+			break
+		} else {
+			x = cons
+		}
+	}
+
+	x = 0
+	for i := range a {
+		v := a[i]
+		for j := 0; j < (len(a) - 1 - i); j++ {
+			v = v * 10
+		}
+		x += v
+	}
+
+	if x < math.MinInt32 || x > math.MaxInt32 {
+		return 0
+	}
+	if !posi {
+		return -x
+	}
+	return x
+}
+
+func reverse(x int) int {
+	cons, rem, result := x, 0, 0 // 商, 余数, 结果
+	for cons != 0 {
+		rem = cons % 10
+		result = result*10 + rem
+		cons = cons / 10
+		if result > math.MaxInt32 || result < math.MinInt32 {
+			return 0
+		}
+	}
+	return result
 }
