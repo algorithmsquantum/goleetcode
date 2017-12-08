@@ -87,3 +87,26 @@ func reverse(x int) int {
 	}
 	return result
 }
+
+// https://leetcode.com/problems/palindrome-number/description/
+// Determine whether an integer is a palindrome. Do this without extra space.
+// Some hints:
+// Could negative integers be palindromes? (ie, -1)
+// If you are thinking of converting the integer to string, note the restriction of using extra space.
+// You could also try reversing an integer. However, if you have solved the problem "Reverse Integer", you know that the reversed integer might overflow. How would you handle such case?
+// There is a more generic way of solving this problem.
+func isPalindrome(x int) bool {
+	if x < 0 {
+		return false
+	}
+	cons, rem, result := x, 0, 0 // 商, 余数, 结果
+	for cons != 0 {
+		rem = cons % 10
+		result = result*10 + rem
+		cons = cons / 10
+		if result > math.MaxInt32 || result < math.MinInt32 {
+			return false
+		}
+	}
+	return result == x
+}
