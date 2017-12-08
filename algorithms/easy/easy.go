@@ -104,9 +104,6 @@ func isPalindrome(x int) bool {
 		rem = cons % 10
 		result = result*10 + rem
 		cons = cons / 10
-		if result > math.MaxInt32 || result < math.MinInt32 {
-			return false
-		}
 	}
 	return result == x
 }
