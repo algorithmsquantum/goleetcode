@@ -86,7 +86,7 @@ func lengthOfLongestSubstring(s string) int {
 // The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
 // If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.
 // If no valid conversion could be performed, a zero value is returned. If the correct value is out of the range of representable values, INT_MAX (2147483647) or INT_MIN (-2147483648) is returned.
-func myAtoi(str string) int {
+func myAtoi(str string) int { // nolint: gocyclo
 	nums, ops := make([]int, 0), make([]rune, 0) // 数字, 操作符
 	for _, v := range str {
 		if v == '-' || v == '+' {
