@@ -18,10 +18,10 @@ func removeDuplicates(nums []int) int {
 // Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory ?
 // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/549/
 func singleNumber(nums []int) int {
-	m := make(map[int]int)
+	m := make(map[int]struct{})
 	for _, v := range nums {
 		if _, ok := m[v]; !ok {
-			m[v] = v
+			m[v] = struct{}{}
 		} else {
 			delete(m, v)
 		}
@@ -30,4 +30,19 @@ func singleNumber(nums []int) int {
 		return k
 	}
 	return 0
+}
+
+// Given an array of integers, find if the array contains any duplicates.
+// Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/578/
+func containsDuplicate(nums []int) bool {
+	m := make(map[int]struct{})
+	for _, v := range nums {
+		if _, ok := m[v]; !ok {
+			m[v] = struct{}{}
+		} else {
+			return true
+		}
+	}
+	return false
 }
